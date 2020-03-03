@@ -14,7 +14,7 @@
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
-  limitations under the License.
+  limitations under the License. 
 */
 'use strict'
 
@@ -42,24 +42,35 @@ var app1 = new Vue({
         msgsSent    : 0,
         msgCtrlSent : '[Nothing]',
         msgsCtrlSent: 0,
+        appData: {},
+        darkskyWeather: {
+            cloudy: ['cloudy', 'partly-cloudy-day', 'partly-cloudy-night'],
+            stormy: ['hail', 'thunderstorm', 'tornado'],
+            sunny: ['clear-day'],
+            rainy: ['rain'],
+            snowy: ['snow', 'sleet'],
+            starry: ['clear-night'],
+            windy: ['wind'],
+            foggy: ['fog']
+        }
     }, // --- End of data --- //
     computed: {
-        hLastRcvd: function() {
+        hLastRcvd() {
             var msgRecvd = this.msgRecvd
             if (typeof msgRecvd === 'string') return 'Last Message Received = ' + msgRecvd
             else return 'Last Message Received = ' + this.syntaxHighlight(msgRecvd)
         },
-        hLastSent: function() {
+        hLastSent() {
             var msgSent = this.msgSent
             if (typeof msgSent === 'string') return 'Last Message Sent = ' + msgSent
             else return 'Last Message Sent = ' + this.syntaxHighlight(msgSent)
         },
-        hLastCtrlRcvd: function() {
+        hLastCtrlRcvd() {
             var msgCtrl = this.msgCtrl
             if (typeof msgCtrl === 'string') return 'Last Control Message Received = ' + msgCtrl
             else return 'Last Control Message Received = ' + this.syntaxHighlight(msgCtrl)
         },
-        hLastCtrlSent: function() {
+        hLastCtrlSent() {
             var msgCtrlSent = this.msgCtrlSent
             if (typeof msgCtrlSent === 'string') return 'Last Control Message Sent = ' + msgCtrlSent
             //else return 'Last Message Sent = ' + this.callMethod('syntaxHighlight', [msgCtrlSent])
@@ -67,26 +78,36 @@ var app1 = new Vue({
         },
     }, // --- End of computed --- //
     methods: {
-        increment: function(event) {
+        toggleSonoff(event) {
             console.log('Button Pressed. Event DatA: ', event)
 
             // Increment the count by one
             this.counterBtn = this.counterBtn + 1
             var topic = this.msgRecvd.topic || 'uibuilder/vue'
             uibuilder.send( {
-                'topic': topic,
-                'payload': {
-                    'type': 'counterBtn',
-                    'btnCount': this.counterBtn,
-                    'message': this.inputText,
-                    'inputChkBox': this.inputChkBox
-                }
+                'topic': 'sonoff',
+                'payload': 'TOGGLE'
             } )
 
-        }, // --- End of increment --- //
+        },
+        
+        toggleSonoff2(event) {
+            console.log('Button Pressed. Event DatA: ', event)
+
+            // Increment the count by one
+            this.counterBtn = this.counterBtn + 1
+            var topic = this.msgRecvd.topic || 'uibuilder/vue'
+            uibuilder.send( {
+                'topic': 'sonoff2',
+                'payload': 'TOGGLE'
+            } )
+
+        },
+        
+        // --- End of increment --- //
 
         // return formatted HTML version of JSON object
-        syntaxHighlight: function(json) {
+        syntaxHighlight(json) {
             json = JSON.stringify(json, undefined, 4)
             json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
             json = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
@@ -109,21 +130,30 @@ var app1 = new Vue({
     }, // --- End of methods --- //
 
     // Available hooks: init,mounted,updated,destroyed
-    mounted: function(){
+    mounted() {
         //console.debug('[indexjs:Vue.mounted] app mounted - setting up uibuilder watchers')
 
         /** **REQUIRED** Start uibuilder comms with Node-RED @since v2.0.0-dev3
          * Pass the namespace and ioPath variables if hosting page is not in the instance root folder
-         * The namespace is the "url" you put in uibuilder's configuration in the Editor.
          * e.g. If you get continual `uibuilderfe:ioSetup: SOCKET CONNECT ERROR` error messages.
-         * e.g. uibuilder.start('uib', '/nr/uibuilder/vendor/socket.io') // change to use your paths/names
+         * e.g. uibuilder.start('/nr/uib', '/nr/uibuilder/vendor/socket.io') // change to use your paths/names
          */
         uibuilder.start()
 
         var vueApp = this
 
+        setInterval(() => {
+            vueApp.appData.upstairs ? vueApp.$set(vueApp.appData, 'upstairs', {}) : undefined;
+            vueApp.appData.puck_moved ? vueApp.$set(vueApp.appData, 'puck_moved', {}) : undefined;
+        }, 30000)
+
         // Example of retrieving data from uibuilder
         vueApp.feVersion = uibuilder.get('version')
+
+        uibuilder.send( { 'topic': 'trains', 'payload': true } )
+        uibuilder.send( { 'topic': 'money', 'payload': true } )
+        uibuilder.send( { 'topic': 'weather', 'payload': true } )
+        uibuilder.send( { 'topic': 'calendar', 'payload': true } )
 
         /** You can use the following to help trace how messages flow back and forth.
          * You can then amend this processing to suite your requirements.
@@ -133,7 +163,8 @@ var app1 = new Vue({
         // If msg changes - msg is updated when a standard msg is received from Node-RED over Socket.IO
         // newVal relates to the attribute being listened to.
         uibuilder.onChange('msg', function(newVal){
-            //console.info('[indexjs:uibuilder.onChange] msg received from Node-RED server:', newVal)
+            // console.info('[indexjs:uibuilder.onChange] msg received from Node-RED server:', newVal)
+            vueApp.$set(vueApp.appData, newVal.topic, newVal)
             vueApp.msgRecvd = newVal
         })
         // As we receive new messages, we get an updated count as well
