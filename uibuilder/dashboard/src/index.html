@@ -46,7 +46,7 @@
         <link rel="apple-touch-icon" sizes="144x144" href="./images/manifest/icon-144x144.png">
         <link rel="apple-touch-icon" sizes="192x192" href="./images/manifest/icon-192x192.png">
     -->
-
+  <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
   <link type="text/css" rel="stylesheet"
         href="../uibuilder/vendor/bootstrap/dist/css/bootstrap.min.css"/>
   <link type="text/css" rel="stylesheet"
@@ -85,61 +85,73 @@
 
     <b-row>
       <!--Boston time-->
-      <b-card title="Current time" tag="article" style="max-width: 20rem;" class="mb-2"
+
+      <b-card title="Current time" class="col-md-3 mb-2 text-center"
               v-if="appData">
         <b-card-text class="text-center">
           <div v-if="appData && appData['datetime-boston']">
             <img src="./images/usa.svg" alt="Boston time" title="Boston time" class="flag">
-            {{ appData['datetime-boston'].payload.split(' ')[1] + ' '+appData['datetime-boston'].payload.split(' ')[2] }}
+            {{ appData['datetime-boston'].payload.split(' ')[1] }}
+            {{appData['datetime-boston'].payload.split(' ')[2] }}
           </div>
           <div v-if="appData && appData['datetime-basingstoke']">
             <img src="./images/uk.svg" alt="Basingstoke time" title="Basingstoke time" class="flag">
-            {{ appData['datetime-basingstoke'].payload.split(' ')[1] + ' '+appData['datetime-basingstoke'].payload.split(' ')[2] }}
-
+            {{ appData['datetime-basingstoke'].payload.split(' ')[1] }} {{
+            appData['datetime-basingstoke'].payload.split(' ')[2] }}
           </div>
           <div v-if="appData && appData['datetime-madrid']">
             <img src="./images/spain.svg" alt="Madrid time" title="Madrid time" class="flag">
-            {{ appData['datetime-madrid'].payload.split(' ')[1] + ' '+appData['datetime-madrid'].payload.split(' ')[2] }}
+            {{ appData['datetime-madrid'].payload.split(' ')[1] }}
+            {{appData['datetime-madrid'].payload.split(' ')[2] }}
 
           </div>
           <div v-if="appData && appData['datetime-warsaw']">
-            <img src="./images/republic-of-poland.svg" alt="Warsaw time"  title="Warsaw time" class="flag">
-            {{ appData['datetime-warsaw'].payload.split(' ')[1] + ' '+appData['datetime-warsaw'].payload.split(' ')[2] }}
+            <img src="./images/republic-of-poland.svg" alt="Warsaw time" title="Warsaw time"
+                 class="flag">
+            {{ appData['datetime-warsaw'].payload.split(' ')[1] }} {{
+            appData['datetime-warsaw'].payload.split(' ')[2] }}
           </div>
         </b-card-text>
       </b-card>
-        <b-col v-if="appData && appData['flowbot-events']">
-
-          <h4>Latest on Slack</h4>
-          {{ appData['flowbot-events'].payload.event.text }}
-
-        </b-col>
-      <b-card title="EditShare Website status" tag="article" style="max-width: 20rem;" class="mb-2"
+      <b-card title="Latest on Slack" class="col-md-3 mb-2 text-center"
+              v-if="appData && appData['flowbot-events']">
+        <b-card-text>
+          {{appData['flowbot-events'].payload.event.text}}
+        </b-card-text>
+      </b-card>
+      <b-card md="4" sm="6" title="EditShare Website status" class="col-md-3 mb-2 text-center"
               v-if="appData && appData['server-status-editshare']">
-        <b-card-text><div v-if="appData['server-status-editshare'].statusCode === 200">
-          Online
-          <i class="fas fa-check green"></i>
-        </div>
+        <b-card-text>
+          <div v-if="appData['server-status-editshare'].statusCode === 200">
+            Online
+            <i class="fas fa-check green"></i>
+          </div>
           <div v-else>
             Offline!
             <i class="fas fa-cross red"></i>
-          </div></b-card-text>
+          </div>
+        </b-card-text>
       </b-card>
 
     </b-row>
 
     <hr class="my-4">
-
     <b-row>
-      <b-col v-if="appData && appData['redshark-rss']">
-        <h4>Redshark latest news 🦈</h4>
-        <div v-html="appData['redshark-rss'].payload"></div>
-      </b-col>
-      <b-col v-if="appData && appData['github-status-rss']">
-        <h4>GitHub Status 🚑</h4>
-        <div v-html="appData['github-status-rss'].payload"></div>
-      </b-col>
+      <b-card title="Redshark latest news" class="col-md-5 mb-2 text-center"
+              v-if="appData && appData['redshark-rss']">
+        <b-card-text>
+          <div v-html="appData['redshark-rss'].payload"></div>
+        </b-card-text>
+      </b-card>
+
+      <b-card title="GitHub Status" class="col-md-5 text-center mb-2"
+              v-if="appData && appData['github-status-rss'] ">
+        <b-card-text>
+          <div v-html="appData['github-status-rss'].payload"></div>
+        </b-card-text>
+      </b-card>
     </b-row>
+  </b-container>
   </b-container>
 </div>
 

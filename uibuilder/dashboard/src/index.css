@@ -27,6 +27,7 @@
   color: #b993ff;
 }
 body {
+  font-family: 'Muli', sans-serif;
   min-width: 100vw;
   min-height: 100vh;
 }
@@ -44,9 +45,14 @@ body {
   border: none;
   border-radius: 0;
 }
+.card-title{
+  font-weight: bold;
+}
 
 .flag{
   max-width: 30px;
+  width: 60px;
+  object-fit: contain;
 }
 .fas.cross{
     position: relative;
