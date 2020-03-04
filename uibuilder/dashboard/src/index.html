@@ -68,21 +68,21 @@
     <b-container id="app_container">
       <b-row>
         <!--Boston time-->
-        <b-card title="Current time" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-boston']">
+        <b-card title="Boston" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-boston']">
           <b-card-text>
             <i class="fas fa-clock"></i>
             {{ appData['datetime-boston'].payload }}
           </b-card-text>
         </b-card>
         <!--Madrid time-->
-        <b-card title="Current time" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-madrid']">
+        <b-card title="Madrid" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-madrid']">
           <b-card-text>
             <i class="fas fa-clock"></i>
             {{ appData['datetime-madrid'].payload }}
           </b-card-text>
         </b-card>
         <!--Warsaw time-->
-        <b-card title="Current time" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-warsaw']">
+        <b-card title="Warsaw" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-warsaw']">
           <b-card-text>
             <i class="fas fa-clock"></i>
             {{ appData['datetime-warsaw'].payload }}
