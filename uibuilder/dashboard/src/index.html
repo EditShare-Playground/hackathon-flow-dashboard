@@ -125,7 +125,7 @@
       <b-row>
         <b-col v-if="appData && appData['redshark-rss']">
           <h4>Redshark latest news</h4>
-          <div v-html="appData['redshark-rss'].payload.article.description"></div>
+          <div v-html="appData['redshark-rss'].payload"></div>
         </b-col>
         <b-col>
           <!-- 🚂 Home -> Work -->
