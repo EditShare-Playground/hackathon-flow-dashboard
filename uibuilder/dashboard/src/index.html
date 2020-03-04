@@ -127,8 +127,9 @@
           <h4>Redshark latest news</h4>
           <div v-html="appData['redshark-rss'].payload"></div>
         </b-col>
-        <b-col>
-          <!-- 🚂 Home -> Work -->
+        <b-col v-if="appData && appData['github-status-rss']">
+          <h4>Redshark latest news</h4>
+          <div v-html="appData['github-status-rss'].payload"></div>
         </b-col>
         <b-col>
           <!-- PuckJS RSSI -->
