@@ -65,7 +65,24 @@
         {{ appData['datetime-basingstoke'].payload }}
       </div>
     </b-navbar>
+
+    <b-jumbotron>
+      <template v-slot:header>SOME IMPORTANT EVENT</template>
+
+      <template v-slot:lead>
+        Uh oh, only a few hours of the Hackathon remain!
+      </template>
+
+      <hr class="my-4">
+
+      <p>
+        Some more text if necessary
+      </p>
+
+    </b-jumbotron>
+
     <b-container id="app_container">
+
       <b-row>
         <!--Boston time-->
         <b-card title="Boston" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-boston']">
