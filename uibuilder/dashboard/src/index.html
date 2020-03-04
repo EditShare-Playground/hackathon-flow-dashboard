@@ -104,12 +104,13 @@
 
         <b-col v-if="appData && appData['flowbot-events']">
 
-          {{ appData['flowbot-events'].payload.event.text }}
+          <h4>Latest on Slack</h4>
+           {{ appData['flowbot-events'].payload.event.text }}
 
         </b-col>
         <b-col v-if="appData && appData['server-status-editshare']">
 
-          EditShare Website status
+          <h4>EditShare Website status</h4>
           <i class="fas fa-check" v-if="appData['server-status-editshare'].statusCode === 200"></i>
           <i class="fas fa-cross" v-else></i>
 
