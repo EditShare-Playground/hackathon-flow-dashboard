@@ -6,7 +6,7 @@
 <html lang="en" manifest="./uibuilder.appcache">
 -->
 <html lang="en">
-  <!--
+<!--
     This is the default, template html for uibuilder.
     It is meant to demonstrate the use of VueJS & bootstrap-vue to dynamically
     update the ui based on incoming/outgoing messages from/to the
@@ -15,39 +15,31 @@
     You will want to alter this to suite your own needs. To do so,
     copy this file to <userDir>/uibuilder/<url>/src.
 -->
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes"
-    />
 
-    <title>Flow Dashboard</title>
-    <meta
-      name="description"
-      content="Node-RED UI Builder - VueJS + bootstrap-vue version"
-    />
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
 
-    <link rel="icon" href="./images/node-blue.ico" />
+  <title>Flow Dashboard</title>
+  <meta name="description" content="Node-RED UI Builder - VueJS + bootstrap-vue version" />
 
-    <!-- See https://goo.gl/OOhYW5 -->
-    <link rel="manifest" href="./manifest.json" />
-    <meta name="theme-color" content="#3f51b5" />
+  <link rel="icon" href="./images/node-blue.ico" />
 
-    <!-- Used if adding to homescreen for Chrome on Android. Fallback for manifest.json -->
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="Node-RED UI Builder" />
+  <!-- See https://goo.gl/OOhYW5 -->
+  <link rel="manifest" href="./manifest.json" />
+  <meta name="theme-color" content="#3f51b5" />
 
-    <!-- Used if adding to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <meta name="apple-mobile-web-app-title" content="Node-RED UI Builder" />
+  <!-- Used if adding to homescreen for Chrome on Android. Fallback for manifest.json -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="Node-RED UI Builder" />
 
-    <!-- Homescreen icons for Apple mobile use if required
+  <!-- Used if adding to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Node-RED UI Builder" />
+
+  <!-- Homescreen icons for Apple mobile use if required
         <link rel="apple-touch-icon" href="./images/manifest/icon-48x48.png">
         <link rel="apple-touch-icon" sizes="72x72" href="./images/manifest/icon-72x72.png">
         <link rel="apple-touch-icon" sizes="96x96" href="./images/manifest/icon-96x96.png">
@@ -55,83 +47,91 @@
         <link rel="apple-touch-icon" sizes="192x192" href="./images/manifest/icon-192x192.png">
     -->
 
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="../uibuilder/vendor/bootstrap/dist/css/bootstrap.min.css"
-    />
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.css"
-    />
+  <link type="text/css" rel="stylesheet" href="../uibuilder/vendor/bootstrap/dist/css/bootstrap.min.css" />
+  <link type="text/css" rel="stylesheet" href="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.css" />
 
-    <!--Font Awesome Icons-->
-    <link href="fontawesome/css/all.css" rel="stylesheet" crossorigin="anonymous">
+  <!--Font Awesome Icons-->
+  <link href="fontawesome/css/all.css" rel="stylesheet" crossorigin="anonymous" />
 
-    <link rel="stylesheet" href="./index.css" media="all" />
-  </head>
-  <body>
-    <div id="app" v-cloak>
-      <b-container id="app_container">
-          <b-row>
-            <b-col>
-              <div>
-                🔌 {{ socketConnectedState ? " connected" : " disconnected"}}
-                <div>
-                  {{ appData.hello  }}
-                </div>
-              </div>
-            </b-col>
-            <b-col>
-              <!-- Hackernews links -->
-              <a
-                target="blank"
-                v-if="appData.hackernews"
-                :href="appData.hackernews.article.link"
-                >📰 {{ appData.hackernews.article.title }}</a
-              >
-              <a v-else target="blank" href="https://news.ycombinator.com/news"
-                >📰 Loading latest HN post&hellip;</a
-              >
-            </b-col>
-            <b-col>
-              <!-- GBP -> EUR -->
-            </b-col>
-          </b-row>
+  <link rel="stylesheet" href="./index.css" media="all" />
+</head>
 
-          <b-row>
-            <b-col>
-              <!-- Time and Date  -->
-            </b-col>
-            <b-col>
-              <!-- 🚂 Home -> Work -->
-            </b-col>
-            <b-col>
-              <!-- PuckJS RSSI -->
-            </b-col>
-          </b-row> 
+<body>
+  <div id="app" v-cloak>
+    <b-navbar toggleable="lg" type="dark">
+      <b-navbar-brand href="#">Flow-next HUB</b-navbar-brand>
+      <div class="ml-auto">
+        <i class="fas fa-clock"></i>
+        {{ (new Date() ).toISOString().replace('T', ' ').split('.')[0] }}
+      </div>
+    </b-navbar>
+    <b-container id="app_container">
+      <b-row>
+        <b-card title="Current time" tag="article" style="max-width: 20rem;" class="mb-2">
+          <b-card-text>
+            <!-- {{ appData.datetime-basingstoke.payload }} -->
+            <!--     {{appData.datatime-boston.payload}}
+                            {{appData.datatime-madrid.payload}}
+                         {{appData.datatime-warsaw.payload}} -->
+          </b-card-text>
+        </b-card>
+        <b-col>
+          <div>
+            <i :class="'fas fa-plug '+ (socketConnectedState ? '' :'cross')"></i>
+          </div>
+        </b-col>
+        <b-col>
+          <!-- Hackernews links -->
+          <a target="blank" v-if="appData.hackernews" :href="appData.hackernews.article.link">📰
+            {{ appData.hackernews.article.title }}</a>
+          <a v-else target="blank" href="https://news.ycombinator.com/news">📰 Loading latest HN post&hellip;</a>
+        </b-col>
+        <b-col>
+          <!-- GBP -> EUR -->
+        </b-col>
+      </b-row>
 
-      </b-container>
-    </div>
+      <!--  {{appData.datatime-madrid.payload}}
+              {{appData.datatime-warsaw.payload}} -->
+      </b-card-text>
+      </b-card>
+      <b-col>
+        <!-- GBP -> EUR -->
+      </b-col>
+      </b-row>
 
-    <!-- These MUST be in the right order. Note no leading / -->
-    <!-- REQUIRED: Socket.IO is loaded only once for all instances
+      <b-row>
+        <b-col>
+          <!-- Time and Date  -->
+        </b-col>
+        <b-col>
+          <!-- 🚂 Home -> Work -->
+        </b-col>
+        <b-col>
+          <!-- PuckJS RSSI -->
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
+
+  <!-- These MUST be in the right order. Note no leading / -->
+  <!-- REQUIRED: Socket.IO is loaded only once for all instances
                      Without this, you don't get a websocket connection -->
-    <script src="../uibuilder/vendor/socket.io/socket.io.js"></script>
+  <script src="../uibuilder/vendor/socket.io/socket.io.js"></script>
 
-    <!-- Vendor Libraries - Load in the right order -->
-    <script src="../uibuilder/vendor/vue/dist/vue.js"></script>
-    <!-- dev version with component compiler -->
-    <!-- <script src="../uibuilder/vendor/vue/dist/vue.min.js"></script>   prod version with component compiler -->
-    <!-- <script src="../uibuilder/vendor/vue/dist/vue.runtime.min.js"></script>   prod version without component compiler -->
-    <script src="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.js"></script>
+  <!-- Vendor Libraries - Load in the right order -->
+  <script src="../uibuilder/vendor/vue/dist/vue.js"></script>
+  <!-- dev version with component compiler -->
+  <!-- <script src="../uibuilder/vendor/vue/dist/vue.min.js"></script>   prod version with component compiler -->
+  <!-- <script src="../uibuilder/vendor/vue/dist/vue.runtime.min.js"></script>   prod version without component compiler -->
+  <script src="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.js"></script>
 
-    <!-- REQUIRED: Sets up Socket listeners and the msg object -->
-    <!-- <script src="./uibuilderfe.js"></script>   //dev version -->
-    <script src="./uibuilderfe.min.js"></script>
-    <!--    //prod version -->
-    <!-- OPTIONAL: You probably want this. Put your custom code here -->
-    <script src="./index.js"></script>
-  </body>
+  <!-- REQUIRED: Sets up Socket listeners and the msg object -->
+  <!-- <script src="./uibuilderfe.js"></script>   //dev version -->
+  <script src="./uibuilderfe.min.js"></script>
+  <!--    //prod version -->
+  <!-- OPTIONAL: You probably want this. Put your custom code here -->
+  <script src="./index.js"></script>
+</body>
+
 </html>
