@@ -64,29 +64,31 @@
         <i class="fas fa-clock"></i>
         {{ appData['datetime-basingstoke'].payload }}
       </div>
-      <div class="ml-auto" v-if="appData && appData['datetime-boston']">
-        <i class="fas fa-clock"></i>
-        {{ appData['datetime-boston'].payload }}
-      </div>
-      <div class="ml-auto" v-if="appData && appData['datetime-madrid']">
-        <i class="fas fa-clock"></i>
-        {{ appData['datetime-madrid'].payload }}
-      </div>
-      <div class="ml-auto" v-if="appData && appData['datetime-warsaw']">
-        <i class="fas fa-clock"></i>
-        {{ appData['datetime-warsaw'].payload }}
-      </div>
     </b-navbar>
     <b-container id="app_container">
       <b-row>
-        <b-card title="Current time" tag="article" style="max-width: 20rem;" class="mb-2">
+        <!--Boston time-->
+        <b-card title="Current time" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-boston']">
           <b-card-text>
-            <!-- {{ appData.datetime-basingstoke.payload }} -->
-            <!--     {{appData.datatime-boston.payload}}
-                            {{appData.datatime-madrid.payload}}
-                         {{appData.datatime-warsaw.payload}} -->
+            <i class="fas fa-clock"></i>
+            {{ appData['datetime-boston'].payload }}
           </b-card-text>
         </b-card>
+        <!--Madrid time-->
+        <b-card title="Current time" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-madrid']">
+          <b-card-text>
+            <i class="fas fa-clock"></i>
+            {{ appData['datetime-madrid'].payload }}
+          </b-card-text>
+        </b-card>
+        <!--Warsaw time-->
+        <b-card title="Current time" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-warsaw']">
+          <b-card-text>
+            <i class="fas fa-clock"></i>
+            {{ appData['datetime-warsaw'].payload }}
+          </b-card-text>
+        </b-card>
+
         <b-col>
           <div>
             <i :class="'fas fa-plug '+ (socketConnectedState ? '' :'cross')"></i>
