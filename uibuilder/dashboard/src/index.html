@@ -60,9 +60,9 @@
   <div id="app" v-cloak>
     <b-navbar toggleable="lg" type="dark">
       <b-navbar-brand href="#">Flow-next HUB</b-navbar-brand>
-      <div class="ml-auto">
+      <div class="ml-auto" v-if="appData && appData['datetime-basingstoke']">
         <i class="fas fa-clock"></i>
-        {{ (new Date() ).toISOString().replace('T', ' ').split('.')[0] }}
+        {{ appData['datetime-basingstoke'].payload }}
       </div>
     </b-navbar>
     <b-container id="app_container">
