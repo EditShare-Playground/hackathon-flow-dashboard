@@ -115,7 +115,9 @@
         </b-col>
         <b-col v-if="appData && appData['server-status-editshare']">
 
-          {{ appData['server-status-editshare'].statusCode }}
+          EditShare Website status
+          <i class="fas fa-check" v-if="appData['server-status-editshare'].statusCode === 200"></i>
+          <i class="fas fa-cross" v-else></i>
 
         </b-col>
       </b-row>
