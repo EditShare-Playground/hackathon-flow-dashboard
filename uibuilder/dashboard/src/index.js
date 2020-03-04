@@ -43,16 +43,6 @@ var app1 = new Vue({
         msgCtrlSent : '[Nothing]',
         msgsCtrlSent: 0,
         appData: {},
-        darkskyWeather: {
-            cloudy: ['cloudy', 'partly-cloudy-day', 'partly-cloudy-night'],
-            stormy: ['hail', 'thunderstorm', 'tornado'],
-            sunny: ['clear-day'],
-            rainy: ['rain'],
-            snowy: ['snow', 'sleet'],
-            starry: ['clear-night'],
-            windy: ['wind'],
-            foggy: ['fog']
-        }
     }, // --- End of data --- //
     computed: {
         hLastRcvd() {
@@ -148,12 +138,16 @@ var app1 = new Vue({
         }, 30000)
 
         // Example of retrieving data from uibuilder
-        vueApp.feVersion = uibuilder.get('version')
+        vueApp.feVersion = uibuilder.get('version');
 
-        uibuilder.send( { 'topic': 'trains', 'payload': true } )
-        uibuilder.send( { 'topic': 'money', 'payload': true } )
-        uibuilder.send( { 'topic': 'weather', 'payload': true } )
-        uibuilder.send( { 'topic': 'calendar', 'payload': true } )
+        uibuilder.send( { 'topic': 'datetime-basingstoke', 'payload': true } );
+        uibuilder.send( { 'topic': 'datetime-boston', 'payload': true } );
+        uibuilder.send( { 'topic': 'datetime-madrid', 'payload': true } );
+        uibuilder.send( { 'topic': 'datetime-warsaw', 'payload': true } );
+        uibuilder.send( { 'topic': 'github-repos-flow-next', 'payload': true } );
+        uibuilder.send( { 'topic': 'github-status-rss', 'payload': true } );
+        uibuilder.send( { 'topic': 'redshark-rss', 'payload': true } );
+        uibuilder.send( { 'topic': 'server-status-editshare', 'payload': true } );
 
         /** You can use the following to help trace how messages flow back and forth.
          * You can then amend this processing to suite your requirements.
