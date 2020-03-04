@@ -111,8 +111,14 @@
         <b-col v-if="appData && appData['server-status-editshare']">
 
           <h4>EditShare Website status</h4>
-          <i class="fas fa-check" v-if="appData['server-status-editshare'].statusCode === 200"></i>
-          <i class="fas fa-cross" v-else></i>
+          <div v-if="appData['server-status-editshare'].statusCode === 200">
+            Online
+            <i class="fas fa-check green"></i>
+          </div>
+          <div v-else>
+            Offline!
+            <i class="fas fa-cross red"></i>
+          </div>
 
         </b-col>
       </b-row>
@@ -121,11 +127,11 @@
 
       <b-row>
         <b-col v-if="appData && appData['redshark-rss']">
-          <h4>Redshark latest news</h4>
+          <h4>Redshark latest news 🦈</h4>
           <div v-html="appData['redshark-rss'].payload"></div>
         </b-col>
         <b-col v-if="appData && appData['github-status-rss']">
-          <h4>GitHub Status</h4>
+          <h4>GitHub Status 🚑</h4>
           <div v-html="appData['github-status-rss'].payload"></div>
         </b-col>
       </b-row>
