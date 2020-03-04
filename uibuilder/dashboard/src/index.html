@@ -66,8 +66,8 @@
       </div>
     </b-navbar>
 
-    <b-jumbotron>
-      <template v-slot:header>SOME IMPORTANT EVENT</template>
+    <b-jumbotron v-if="appData && appData.slack">
+      <template v-slot:header>{{ appData.slack.payload }}</template>
 
       <hr class="my-4">
 
