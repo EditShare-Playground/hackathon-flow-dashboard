@@ -15,7 +15,6 @@
     You will want to alter this to suite your own needs. To do so,
     copy this file to <userDir>/uibuilder/<url>/src.
 -->
-
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -59,7 +58,7 @@
 <body>
   <div id="app" v-cloak>
     <b-navbar toggleable="lg" type="dark">
-      <b-navbar-brand href="#">Flow Dashboard</b-navbar-brand>
+      <b-navbar-brand href="#">Flow Dashboard   <i :class="'fas fa-plug '+ (socketConnectedState ? '' :'cross')"></i></b-navbar-brand>
       <div class="ml-auto" v-if="appData && appData['datetime-basingstoke']">
         <i class="fas fa-clock"></i>
         {{ appData['datetime-basingstoke'].payload }}
@@ -103,11 +102,6 @@
           </b-card-text>
         </b-card>
 
-        <b-col>
-          <div>
-            <i :class="'fas fa-plug '+ (socketConnectedState ? '' :'cross')"></i>
-          </div>
-        </b-col>
         <b-col v-if="appData && appData['flowbot-events']">
 
           {{ appData['flowbot-events'].payload.event.text }}
