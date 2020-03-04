@@ -58,7 +58,7 @@
 <body>
   <div id="app" v-cloak>
     <b-navbar toggleable="lg" type="dark">
-      <b-navbar-brand href="#">Flow Dashboard  test change <i :class="'fas fa-plug '+ (socketConnectedState ? '' :'cross')"></i></b-navbar-brand>
+      <b-navbar-brand href="#">Flow Dashboard  <i :class="'fas fa-plug '+ (socketConnectedState ? '' :'cross')"></i></b-navbar-brand>
       <div class="ml-auto" v-if="appData && appData['datetime-basingstoke']">
         <i class="fas fa-clock"></i>
         {{ appData['datetime-basingstoke'].payload }}
