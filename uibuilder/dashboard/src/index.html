@@ -113,8 +113,10 @@
           {{ appData['flowbot-events'].payload.event.text }}
 
         </b-col>
-        <b-col>
-          <!-- GBP -> EUR -->
+        <b-col v-if="appData && appData['server-status-editshare']">
+
+          {{ appData['server-status-editshare'].payload.status_code }}
+
         </b-col>
       </b-row>
 
