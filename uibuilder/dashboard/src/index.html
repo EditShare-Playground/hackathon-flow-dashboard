@@ -71,16 +71,14 @@
   <body>
     <div id="app" v-cloak>
       <b-container id="app_container">
-        <!-- https://codemyui.com/pure-css-animated-weather-icons -->
-        <div v-if="appData && appData.giphytv">
-          <img src="http://api.giphy.com/v1/gifs/random?api_key=CW27AW0nlp5u0&tag=meme" />        
-          <img :src="appData.giphytv" alt />
-        </div>
           <b-row>
             <b-col>
               <div>
-                🔌 {{ socketConnectedState ? " connected" : " disconnected"}} at {{ appData.hello  }}
-              </div>
+                🔌 {{ socketConnectedState ? " connected" : " disconnected"}}
+                <div>
+                  {{ appData.hello  }}
+                </div>
+              </div>K
             </b-col>
             <b-col>
               <!-- Hackernews links -->
@@ -96,82 +94,18 @@
             </b-col>
             <b-col>
               <!-- GBP -> EUR -->
-              <div v-if="appData.currency_gbp_eur">
-                💷 {{ appData.currency_gbp_eur.payload }}
-              </div>
-
-              <!-- BTC -->
-              <div v-if="appData.currency_btc">
-                ₿ {{ appData.currency_btc.payload }}
-              </div>
             </b-col>
           </b-row>
 
           <b-row>
             <b-col>
               <!-- Time and Date  -->
-              <div v-if="appData.current_time">
-                📅 {{ appData.current_time.payload }}
-              </div>
-              <!-- Time and Date  -->
-              <div v-if="appData.ISS">
-                🛰️ ISS next appearance: {{ appData.ISS.payload.strtime }}
-              </div>
             </b-col>
             <b-col>
               <!-- 🚂 Home -> Work -->
-              <div
-                v-if="appData.trains_leaving_home && appData.trains_leaving_home.payload.departures.all.length"
-              >
-                🚂 Departs {{ appData.trains_leaving_home.payload.station_name
-                }} {{
-                appData.trains_leaving_home.payload.departures.all[0].aimed_departure_time
-                }} ({{
-                appData.trains_leaving_home.payload.departures.all[0].aimed_arrival_time
-                }}) PLAT ({{
-                appData.trains_leaving_home.payload.departures.all[0].platform
-                }})
-              </div>
-              <div v-else>No trains to work</div>
-
-              <!-- 🚂 Work -> Home  -->
-              <div
-                v-if="appData.trains_leaving_work && appData.trains_leaving_work.payload.departures.all.length"
-              >
-                🚂 Departs {{ appData.trains_leaving_work.payload.station_name
-                }} {{
-                appData.trains_leaving_work.payload.departures.all[0].aimed_departure_time
-                }} ({{
-                appData.trains_leaving_work.payload.departures.all[0].aimed_arrival_time
-                }}) PLAT ({{
-                appData.trains_leaving_work.payload.departures.all[0].platform
-                }})
-              </div> 
-              <div v-else>No trains home</div>
-            </b-col> 
+            </b-col>
             <b-col>
               <!-- PuckJS RSSI -->
-              <div v-if="appData.mqtt">
-                ⚪ {{ appData.mqtt.payload }} {{ appData.puck_moved &&
-                appData.puck_moved.payload ? "Moved!" : null }}
-              </div>
-               
-              <!-- Sonoff -->
-              <button :class="{ muted: !(appData.switch1 && appData.switch1.payload) }" @click="toggleSonoff">
-                💡 Sonoff
-              </button>
-               
-              <!-- Sonoff 2 -->
-              <button :class="{ muted: !(appData.switch2 && appData.switch2.payload) }" @click="toggleSonoff2">
-                💡 Sonoff2
-              </button>
-
-              <!-- Upstairs -->
-              <div v-if="appData.upstairs && appData.upstairs.payload">
-                💡 Upstairs
-              </div>
-              <div v-else></div>
-              
             </b-col>
           </b-row> 
 
