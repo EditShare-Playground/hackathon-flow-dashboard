@@ -59,10 +59,22 @@
 <body>
   <div id="app" v-cloak>
     <b-navbar toggleable="lg" type="dark">
-      <b-navbar-brand href="#">Flow-next HUB</b-navbar-brand>
+      <b-navbar-brand href="#">Flow Dashboard</b-navbar-brand>
       <div class="ml-auto" v-if="appData && appData['datetime-basingstoke']">
         <i class="fas fa-clock"></i>
         {{ appData['datetime-basingstoke'].payload }}
+      </div>
+      <div class="ml-auto" v-if="appData && appData['datetime-boston']">
+        <i class="fas fa-clock"></i>
+        {{ appData['datetime-boston'].payload }}
+      </div>
+      <div class="ml-auto" v-if="appData && appData['datetime-madrid']">
+        <i class="fas fa-clock"></i>
+        {{ appData['datetime-madrid'].payload }}
+      </div>
+      <div class="ml-auto" v-if="appData && appData['datetime-warsaw']">
+        <i class="fas fa-clock"></i>
+        {{ appData['datetime-warsaw'].payload }}
       </div>
     </b-navbar>
     <b-container id="app_container">
@@ -81,10 +93,9 @@
           </div>
         </b-col>
         <b-col>
-          <!-- Hackernews links -->
-          <a target="blank" v-if="appData.hackernews" :href="appData.hackernews.article.link">📰
-            {{ appData.hackernews.article.title }}</a>
-          <a v-else target="blank" href="https://news.ycombinator.com/news">📰 Loading latest HN post&hellip;</a>
+
+
+
         </b-col>
         <b-col>
           <!-- GBP -> EUR -->
