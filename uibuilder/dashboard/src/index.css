@@ -1,4 +1,4 @@
-/* Cloak elements on initial load to hide the possible display of {{ ... }} 
+/* Cloak elements on initial load to hide the possible display of {{ ... }}
  * Add to the app tag or to specific tags
  * To display "loading...", change to the following:
  *    [v-cloak] > * { display:none }
@@ -40,6 +40,13 @@ body {
 
 .card {
   background-color: #1a1e27;
+  margin: 10px;
+  border: none;
+  border-radius: 0;
+}
+
+.flag{
+  max-width: 30px;
 }
 .fas.cross{
     position: relative;

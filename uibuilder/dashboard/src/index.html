@@ -16,27 +16,28 @@
     copy this file to <userDir>/uibuilder/<url>/src.
 -->
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes" />
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport"
+        content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes"/>
 
   <title>Flow Dashboard</title>
-  <meta name="description" content="Dashboard - Flow team" />
+  <meta name="description" content="Dashboard - Flow team"/>
 
-  <link rel="icon" href="./images/node-blue.ico" />
+  <link rel="icon" href="./images/node-blue.ico"/>
 
   <!-- See https://goo.gl/OOhYW5 -->
-  <link rel="manifest" href="./manifest.json" />
-  <meta name="theme-color" content="#3f51b5" />
+  <link rel="manifest" href="./manifest.json"/>
+  <meta name="theme-color" content="#3f51b5"/>
 
   <!-- Used if adding to homescreen for Chrome on Android. Fallback for manifest.json -->
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="application-name" content="Node-RED UI Builder" />
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="application-name" content="Node-RED UI Builder"/>
 
   <!-- Used if adding to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Node-RED UI Builder" />
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Node-RED UI Builder"/>
 
   <!-- Homescreen icons for Apple mobile use if required
         <link rel="apple-touch-icon" href="./images/manifest/icon-48x48.png">
@@ -46,116 +47,120 @@
         <link rel="apple-touch-icon" sizes="192x192" href="./images/manifest/icon-192x192.png">
     -->
 
-  <link type="text/css" rel="stylesheet" href="../uibuilder/vendor/bootstrap/dist/css/bootstrap.min.css" />
-  <link type="text/css" rel="stylesheet" href="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.css" />
+  <link type="text/css" rel="stylesheet"
+        href="../uibuilder/vendor/bootstrap/dist/css/bootstrap.min.css"/>
+  <link type="text/css" rel="stylesheet"
+        href="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.css"/>
 
   <!--Font Awesome Icons-->
-  <link href="fontawesome/css/all.css" rel="stylesheet" crossorigin="anonymous" />
+  <link href="fontawesome/css/all.css" rel="stylesheet" crossorigin="anonymous"/>
 
-  <link rel="stylesheet" href="./index.css" media="all" />
+  <link rel="stylesheet" href="./index.css" media="all"/>
 </head>
 
 <body>
-  <div id="app" v-cloak>
-    <b-navbar toggleable="lg" type="dark">
-      <b-navbar-brand href="#">Flow Dashboard  <i :class="'fas fa-plug '+ (socketConnectedState ? '' :'cross')"></i></b-navbar-brand>
-      <div class="ml-auto" v-if="appData && appData['datetime-basingstoke']">
-        <i class="fas fa-clock"></i>
-        {{ appData['datetime-basingstoke'].payload }}
-      </div>
-    </b-navbar>
+<div id="app" v-cloak>
+  <b-navbar toggleable="lg" type="dark">
+    <b-navbar-brand href="#">Flow Dashboard <i
+      :class="'fas fa-plug '+ (socketConnectedState ? '' :'cross')"></i></b-navbar-brand>
+    <div class="ml-auto" v-if="appData && appData['datetime-basingstoke']">
+      <i class="fas fa-clock"></i>
+      {{ new Date().toLocaleString() }}
+    </div>
+  </b-navbar>
 
-    <b-jumbotron v-if="appData && appData.flowbot">
+  <b-jumbotron v-if="appData && appData.flowbot">
 
-      <template v-slot:header>{{ appData.flowbot.payload.text }}</template>
+    <template v-slot:header>{{ appData.flowbot.payload.text }}</template>
 
-      <hr class="my-4">
+    <hr class="my-4">
 
-      <template v-slot:lead>
-        From: {{ appData.flowbot.payload.user_name }}
-      </template>
+    <template v-slot:lead>
+      From: {{ appData.flowbot.payload.user_name }}
+    </template>
 
-    </b-jumbotron>
+  </b-jumbotron>
 
-    <b-container id="app_container">
+  <b-container id="app_container">
 
-      <b-row>
-        <!--Boston time-->
-        <b-card title="Boston" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-boston']">
-          <b-card-text>
-            <i class="fas fa-clock"></i>
-            {{ appData['datetime-boston'].payload }}
-          </b-card-text>
-        </b-card>
-        <!--Madrid time-->
-        <b-card title="Madrid" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-madrid']">
-          <b-card-text>
-            <i class="fas fa-clock"></i>
-            {{ appData['datetime-madrid'].payload }}
-          </b-card-text>
-        </b-card>
-        <!--Warsaw time-->
-        <b-card title="Warsaw" tag="article" style="max-width: 20rem;" class="mb-2" v-if="appData && appData['datetime-warsaw']">
-          <b-card-text>
-            <i class="fas fa-clock"></i>
-            {{ appData['datetime-warsaw'].payload }}
-          </b-card-text>
-        </b-card>
+    <b-row>
+      <!--Boston time-->
+      <b-card title="Current time" tag="article" style="max-width: 20rem;" class="mb-2"
+              v-if="appData">
+        <b-card-text class="text-center">
+          <div v-if="appData && appData['datetime-boston']">
+            <img src="./images/usa.svg" alt="Boston time" title="Boston time" class="flag">
+            {{ appData['datetime-boston'].payload.split(' ')[1] + ' '+appData['datetime-boston'].payload.split(' ')[2] }}
+          </div>
+          <div v-if="appData && appData['datetime-basingstoke']">
+            <img src="./images/uk.svg" alt="Basingstoke time" title="Basingstoke time" class="flag">
+            {{ appData['datetime-basingstoke'].payload.split(' ')[1] + ' '+appData['datetime-basingstoke'].payload.split(' ')[2] }}
 
+          </div>
+          <div v-if="appData && appData['datetime-madrid']">
+            <img src="./images/spain.svg" alt="Madrid time" title="Madrid time" class="flag">
+            {{ appData['datetime-madrid'].payload.split(' ')[1] + ' '+appData['datetime-madrid'].payload.split(' ')[2] }}
+
+          </div>
+          <div v-if="appData && appData['datetime-warsaw']">
+            <img src="./images/republic-of-poland.svg" alt="Warsaw time"  title="Warsaw time" class="flag">
+            {{ appData['datetime-warsaw'].payload.split(' ')[1] + ' '+appData['datetime-warsaw'].payload.split(' ')[2] }}
+          </div>
+        </b-card-text>
+      </b-card>
         <b-col v-if="appData && appData['flowbot-events']">
 
           <h4>Latest on Slack</h4>
-           {{ appData['flowbot-events'].payload.event.text }}
+          {{ appData['flowbot-events'].payload.event.text }}
 
         </b-col>
-        <b-col v-if="appData && appData['server-status-editshare']">
-
-          <h4>EditShare Website status</h4>
-          <div v-if="appData['server-status-editshare'].statusCode === 200">
-            Online
-            <i class="fas fa-check green"></i>
-          </div>
+      <b-card title="EditShare Website status" tag="article" style="max-width: 20rem;" class="mb-2"
+              v-if="appData && appData['server-status-editshare']">
+        <b-card-text><div v-if="appData['server-status-editshare'].statusCode === 200">
+          Online
+          <i class="fas fa-check green"></i>
+        </div>
           <div v-else>
             Offline!
             <i class="fas fa-cross red"></i>
-          </div>
+          </div></b-card-text>
+      </b-card>
 
-        </b-col>
-      </b-row>
+    </b-row>
 
-      <hr class="my-4">
+    <hr class="my-4">
 
-      <b-row>
-        <b-col v-if="appData && appData['redshark-rss']">
-          <h4>Redshark latest news 🦈</h4>
-          <div v-html="appData['redshark-rss'].payload"></div>
-        </b-col>
-        <b-col v-if="appData && appData['github-status-rss']">
-          <h4>GitHub Status 🚑</h4>
-          <div v-html="appData['github-status-rss'].payload"></div>
-        </b-col>
-      </b-row>
-    </b-container>
-  </div>
+    <b-row>
+      <b-col v-if="appData && appData['redshark-rss']">
+        <h4>Redshark latest news 🦈</h4>
+        <div v-html="appData['redshark-rss'].payload"></div>
+      </b-col>
+      <b-col v-if="appData && appData['github-status-rss']">
+        <h4>GitHub Status 🚑</h4>
+        <div v-html="appData['github-status-rss'].payload"></div>
+      </b-col>
+    </b-row>
+  </b-container>
+</div>
 
-  <!-- These MUST be in the right order. Note no leading / -->
-  <!-- REQUIRED: Socket.IO is loaded only once for all instances
-                     Without this, you don't get a websocket connection -->
-  <script src="../uibuilder/vendor/socket.io/socket.io.js"></script>
+<!-- These MUST be in the right order. Note no leading / -->
+<!-- REQUIRED: Socket.IO is loaded only once for all instances
+                   Without this, you don't get a websocket connection -->
+<script src="../uibuilder/vendor/socket.io/socket.io.js"></script>
 
-  <!-- Vendor Libraries - Load in the right order -->
-  <script src="../uibuilder/vendor/vue/dist/vue.js"></script>
-  <!-- dev version with component compiler -->
-  <!-- <script src="../uibuilder/vendor/vue/dist/vue.min.js"></script>   prod version with component compiler -->
-  <!-- <script src="../uibuilder/vendor/vue/dist/vue.runtime.min.js"></script>   prod version without component compiler -->
-  <script src="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.js"></script>
+<!-- Vendor Libraries - Load in the right order -->
+<script src="../uibuilder/vendor/vue/dist/vue.js"></script>
+<!-- dev version with component compiler -->
+<!-- <script src="../uibuilder/vendor/vue/dist/vue.min.js"></script>   prod version with component compiler -->
+<!-- <script src="../uibuilder/vendor/vue/dist/vue.runtime.min.js"></script>   prod version without component compiler -->
+<script src="../uibuilder/vendor/bootstrap-vue/dist/bootstrap-vue.js"></script>
 
-  <!-- REQUIRED: Sets up Socket listeners and the msg object -->
-  <!-- <script src="./uibuilderfe.js"></script>   //dev version -->
-  <script src="./uibuilderfe.min.js"></script>
-  <!--    //prod version -->
-  <!-- OPTIONAL: You probably want this. Put your custom code here -->
-  <script src="./index.js"></script>
+<!-- REQUIRED: Sets up Socket listeners and the msg object -->
+<!-- <script src="./uibuilderfe.js"></script>   //dev version -->
+<script src="./uibuilderfe.min.js"></script>
+<!--    //prod version -->
+<!-- OPTIONAL: You probably want this. Put your custom code here -->
+<script src="./index.js"></script>
 </body>
 
 </html>
