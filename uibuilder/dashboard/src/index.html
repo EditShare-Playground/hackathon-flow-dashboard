@@ -67,12 +67,12 @@
     </b-navbar>
 
     <b-jumbotron v-if="appData && appData.flowbot">
-      <template v-slot:header>{{ appData.flowbot.payload }}</template>
+      <template v-slot:header>{{ appData.flowbot.payload.text }}</template>
 
       <hr class="my-4">
 
       <template v-slot:lead>
-        Uh oh, only a few hours of the Hackathon remain!
+        From: {{ appData.flowbot.payload.user_name }}
       </template>
 
     </b-jumbotron>
