@@ -57,3 +57,7 @@ body {
 h1, h2, h3, h4, h5 {
   color: #ffbf35;
 }
+
+.jumbotron {
+  background: #0d1319;
+}
